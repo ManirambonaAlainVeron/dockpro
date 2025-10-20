@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: dockpro_db
+      POSTGRES_PASSWORD: Ndahiriwe@1995
+      POSTGRES_USERNAME: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dockpro-networks
+
+  app:
+    image: dockpro_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/dockpro_db
+      SPRING_DATASOURCE_PASSWORD: Ndahiriwe@1995
+      SPRING_DATASOURCE_USERNAME: postgres
+    networks:
+      - dockpro-networks
+
+volumes:
+  postgres_data:
