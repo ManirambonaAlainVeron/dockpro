@@ -4,7 +4,7 @@ services:
     environment:
       POSTGRES_DB: dockpro_db
       POSTGRES_PASSWORD: Ndahiriwe@1995
-      POSTGRES_USERNAME: postgres
+      POSTGRES_USER: postgres
     ports:
       - "5432:5432"
     volumes:
@@ -30,3 +30,7 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  dockpro-networks:
+    external: true
